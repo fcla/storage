@@ -27,6 +27,7 @@ module SimpleStorage
     put '/:name' do |name|
       halt 400, "#{name} already exists" if @silo.has? name
       @silo.write!(name) { |io| io.write request.body.read }
+      status 201
     end
     
     delete '/:name' do |name|

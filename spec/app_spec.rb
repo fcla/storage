@@ -18,7 +18,7 @@ describe SimpleStorage::App do
 
   it "should allow putting of stuff" do
     put "/foo", "FOO", 'Content-Type' => 'text/plain'
-    last_response.should be_ok
+    last_response.status.should == 201
   end
   
   it "should not allow putting of stuff that exists" do
