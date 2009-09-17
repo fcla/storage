@@ -1,0 +1,12 @@
+<html>
+<head></head>
+<body>
+  <ul>
+    <% @silo.entries.each do |e| %>
+    <li>
+      <a href="<%= e %>"><%= e %></a>
+    </li>
+    <% end %>
+  </ul>
+</body>
+</html>
