@@ -5,6 +5,8 @@ module SimpleStorage
 
   class App < Sinatra::Base
     
+    set :root, File.dirname(__FILE__)
+    
     def initialize(silo_root=nil)
       root = silo_root || options.silo_root
       raise 'silo root not specified' unless root
