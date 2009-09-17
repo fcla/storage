@@ -5,8 +5,10 @@ module SimpleStorage
 
   class App < Sinatra::Base
     
-    def initialize
-      @silo = Silo.new options.silo_root
+    def initialize(silo_root=nil)
+      root = silo_root || options.silo_root
+      raise 'silo root not specified' unless root
+      @silo = Silo.new root
       super
     end
 
