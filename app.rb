@@ -30,6 +30,10 @@ module SimpleStorage
       status 201
     end
     
+    delete '/' do
+      @silo.nuke!
+    end
+    
     delete '/:name' do |name|
       not_found unless @silo.has? name
       FileUtils::rm_rf @silo.delete!(name)

@@ -51,6 +51,19 @@ describe SimpleStorage::App do
     delete "/foo"
     last_response.should_not be_ok
   end
+
+  it "should all deletion of everything" do
+    put "/foo", "FOO", 'Content-Type' => 'text/plain'
+    put "/bar", "BAR", 'Content-Type' => 'text/plain'
+    
+    delete "/"
+    last_response.should be_ok
+    
+    get "/foo"
+    last_response.should_not be_ok
+    get "/bar"
+    last_response.should_not be_ok
+  end
   
   it "should list all stuff in the silo" do
     put "/foo", "FOO", 'Content-Type' => 'text/plain'

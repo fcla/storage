@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module SimpleStorage
   
   class Silo
@@ -26,6 +28,11 @@ module SimpleStorage
       Dir.chdir @root do
         Dir['*']
       end
+    end
+    
+    def nuke!
+      pattern = File.join @root, '*'
+      FileUtils::rm_rf Dir[pattern]
     end
     
     private
