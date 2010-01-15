@@ -4,6 +4,11 @@ require "silo"
 module SimpleStorage
 
   class App < Sinatra::Base
+
+    require 'rack'
+    use Rack::CommonLogger
+    use Rack::ShowExceptions
+    use Rack::Lint
     
     set :root, File.dirname(__FILE__)
     
@@ -44,6 +49,6 @@ module SimpleStorage
 end
 
 if __FILE__ == $0
-  raise 'a silo root must be specified' unless ARGV.first
+  raise 'a silo root must be specified' unless ARGV.first  
   SimpleStorage::App.run! :silo_root => ARGV.first
 end

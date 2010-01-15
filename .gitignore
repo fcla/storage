@@ -1,1 +1,6 @@
+*.gem
+pkg
+*.log
 *.tmproj
+test-stack
+*.swp
