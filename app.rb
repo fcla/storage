@@ -5,11 +5,6 @@ module SimpleStorage
 
   class App < Sinatra::Base
 
-    require 'rack'
-    use Rack::CommonLogger
-    use Rack::ShowExceptions
-    use Rack::Lint
-    
     set :root, File.dirname(__FILE__)
     
     def initialize(silo_root=nil)
