@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'digest/md5'
 require "sinatra/base"
 require "silo"
 
@@ -23,6 +24,7 @@ module SimpleStorage
       not_found unless @silo.has? name
       content_type 'application/octet-stream'
       response['Content-SHA1'] = open(@silo.file_for(name)) { |io| Digest::SHA1.hexdigest io.read }
+      response['Content-MD5'] = open(@silo.file_for(name)) { |io| Digest::MD5.hexdigest io.read }
       send_file @silo.file_for(name)
     end
     
