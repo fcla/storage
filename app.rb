@@ -20,19 +20,13 @@ module SimpleStorage
       erb :index
     end
     
-    head '/:name' do |name|
-      not_found unless @silo.has? name
-      content_type 'application/octet-stream'
-      response['Content-SHA1'] = open(@silo.file_for(name)) { |io| Digest::SHA1.hexdigest io.read }
-      response['Content-MD5'] = open(@silo.file_for(name)) { |io| Digest::MD5.hexdigest io.read }
-    end
-
     get '/:name' do |name|
       not_found unless @silo.has? name
       content_type 'application/octet-stream'
-      response['Content-SHA1'] = open(@silo.file_for(name)) { |io| Digest::SHA1.hexdigest io.read }
-      response['Content-MD5'] = open(@silo.file_for(name)) { |io| Digest::MD5.hexdigest io.read }
-      send_file @silo.file_for(name)
+      atom = @silo[name]
+      response['Content-SHA1'] = atom.sha1
+      response['Content-MD5'] = atom.md5
+      send_file atom.data_path
     end
     
     put '/:name' do |name|
@@ -47,7 +41,7 @@ module SimpleStorage
     
     delete '/:name' do |name|
       not_found unless @silo.has? name
-      FileUtils::rm_rf @silo.delete!(name)
+      @silo.delete! name
     end
     
   end
