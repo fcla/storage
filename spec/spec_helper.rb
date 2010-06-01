@@ -1,8 +1,13 @@
-app_file = File.join File.dirname(__FILE__), '..', 'app'
-require app_file
+require "rubygems"
+require "bundler"
+Bundler.setup
+
 require 'spec'
 require 'rack/test'
 require 'fileutils'
+
+app_file = File.join File.dirname(__FILE__), '..', 'app'
+require app_file
 
 def new_sandbox
   tf = Tempfile.new 'sandbox'
@@ -16,7 +21,7 @@ Spec::Runner.configure do |conf|
 end
 
 def app
-  SimpleStorage::App
+  Sinatra::Application
 end
 
 app.set :environment, :test

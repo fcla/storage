@@ -4,3 +4,4 @@ pkg
 *.tmproj
 test-stack
 *.swp
+.bundle
